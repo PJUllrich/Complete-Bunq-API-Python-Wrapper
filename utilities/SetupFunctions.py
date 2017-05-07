@@ -8,8 +8,10 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 
 from config import Controller
+from ApiClient import ApiClient
 
 config = Controller()
+api_client = ApiClient()
 
 
 def create_new_key_pair():
@@ -51,10 +53,9 @@ def register_key_pair():
     :return: Prints out either a success message or the Error message of the API
     """
     private_key = config.get('KEY_PRIVATE')
-    bunq_api = API(private_key, None)
-    public_key = bunq_api.pubkey().decode()
+    public_key = api_client.pubkey
 
-    r = bunq_api.query('installation', {'client_public_key': public_key})
+    r = api_client.post('installation', {'client_public_key': public_key})
     if r.status_code == 200:
         token_entry = [x for x in r.json()['Response'] if list(x)[0] == 'Token'][0]
         server_entry = [x for x in r.json()['Response'] if list(x)[0] == 'ServerPublicKey'][0]
@@ -62,8 +63,8 @@ def register_key_pair():
         token_user = token_entry['Token']['token']
         server_public_key = server_entry['ServerPublicKey']['server_public_key']
 
-        config.set('TOKEN_USER', token_user)
-        config.set('SERVER_PUBLIC_KEY', server_public_key)
+        config.set('user_token', token_user)
+        config.set('server_pubkey', server_public_key)
 
         print('Key pair was registered successfully.')
     else:
@@ -78,10 +79,9 @@ def create_new_device_server():
     
     :return: Prints out either a success message or the Error message of the API
     """
-    api_key = config.get('API_KEY')
-    bunq_api = get_api_connection(False)
+    payload = {'description': 'Castle', 'secret': api_client.api_key}
 
-    r = bunq_api.query('device-server', {'description': 'Peter MacBook Pro', 'secret': api_key})
+    r = api_client.post('device-server', payload)
     if r.status_code == 200:
         print('New device server was created successfully.')
     else:
@@ -98,10 +98,9 @@ def create_new_session():
     
     :return: Prints out either a success message or the Error message of the API
     """
-    bunq_api = get_api_connection(False)
-    api_key = config.get('API_KEY')
 
-    r = bunq_api.query('session-server', {'secret': api_key})
+    r = api_client.post('session-server', {'secret': api_client.api_key})
+
     if r.status_code == 200:
         res = [x for x in r.json()['Response'] if list(x)[0] == 'Token'][0]
         session_token = res['Token']['token']
@@ -117,8 +116,7 @@ def get_user_id():
     
     :return: Prints out either a success message or the Error message of the API
     """
-    bunq_api = get_api_connection()
-    r = bunq_api.query('user', verify=True)
+    r = api_client.get('user', verify=True)
     if r.status_code == 200:
         res = [x for x in r.json()['Response'] if list(x)[0] == 'UserPerson'][0]
         user_id = res['UserPerson']['id']
@@ -126,24 +124,3 @@ def get_user_id():
         print('User id retrieved successfully.')
     else:
         print('Retrieve User ID Error: ' + str(r.json()['Error'][0]))
-
-
-def get_api_connection(with_token_session=True):
-    """Creates an instance of the API class in apiwrapper with info from the config
-    
-    TOKEN_USER, KEY_PRIVATE, and SERVER_PUBLIC_KEY need to be set in order for this method to run
-    Optional:   The session token can be added to the API object. 
-                For this TOKEN_SESSION needs to be set in config.
-    
-    :param with_token_session: Boolean. Add session token to API object.
-    :return: An object of the API class in apiwrapper. w
-    """
-    token = config.get('TOKEN_USER')
-    private_key = config.get('KEY_PRIVATE')
-    server_public_key = config.get('SERVER_PUBLIC_KEY')
-
-    connection = API(private_key, token, servkey_pem=server_public_key)
-    if with_token_session:
-        connection.token = config.get('TOKEN_SESSION')
-
-    return connection
