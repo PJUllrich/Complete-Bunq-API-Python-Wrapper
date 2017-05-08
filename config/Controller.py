@@ -19,7 +19,10 @@ class Controller(object):
 
     def get(self, name, section=section_default):
         """Returns a value with a given name from the configuration file."""
-        return self.parser[section][name]
+        try:
+            return self.parser[section][name]
+        except KeyError:
+            return None
 
     def set(self, name, val, section=section_default):
         """Sets an entry in the default section of the config file to a specifieg value

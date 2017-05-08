@@ -70,7 +70,7 @@ def register_key_pair():
 
         print('Key pair was registered successfully.')
     else:
-        print('Register Key Pair Error: ' + r.json()['Error'][0])
+        print('Register Key Pair Error: ' + str(r.json()['Error'][0]))
 
 
 def create_new_device_server():
@@ -87,7 +87,7 @@ def create_new_device_server():
     if r.status_code == 200:
         print('New device server was created successfully.')
     else:
-        print('Create Session Error: ' + str(r.json()['Error'][0]))
+        print('New Device Server Error: ' + str(r.json()['Error'][0]))
 
 
 def create_new_session():
