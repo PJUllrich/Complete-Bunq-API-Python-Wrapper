@@ -1,5 +1,8 @@
 """
-DISCLAIMER: This code was mostly taken from the example files in https://github.com/madeddie/python-bunq
+DISCLAIMER: This code was mostly taken from the example files in: 
+
+https://github.com/madeddie/python-bunq
+
 Thanks for @madeddie for writing these examples and the API Wrapper
 """
 
@@ -36,8 +39,8 @@ def create_new_key_pair():
         format=serialization.PublicFormat.SubjectPublicKeyInfo
     ).decode()
 
-    config.set('KEY_PRIVATE', private_key_decoded)
-    config.set('KEY_PUBLIC', public_key_decoded)
+    config.set('key_private', private_key_decoded)
+    config.set('key_public', public_key_decoded)
 
     print('New key pair created and saved to config.ini file.')
 
@@ -52,10 +55,9 @@ def register_key_pair():
     
     :return: Prints out either a success message or the Error message of the API
     """
-    private_key = config.get('KEY_PRIVATE')
-    public_key = api_client.pubkey
+    payload = {'client_public_key': api_client.pubkey}
 
-    r = api_client.post('installation', {'client_public_key': public_key})
+    r = api_client.post('installation', payload)
     if r.status_code == 200:
         token_entry = [x for x in r.json()['Response'] if list(x)[0] == 'Token'][0]
         server_entry = [x for x in r.json()['Response'] if list(x)[0] == 'ServerPublicKey'][0]
@@ -104,7 +106,7 @@ def create_new_session():
     if r.status_code == 200:
         res = [x for x in r.json()['Response'] if list(x)[0] == 'Token'][0]
         session_token = res['Token']['token']
-        config.set('TOKEN_SESSION', session_token)
+        config.set('session_token', session_token)
         print('New session was created successfully.')
     else:
         print('Create Session Error: ' + str(r.json()['Error'][0]))
