@@ -3,17 +3,16 @@ from endpoints.endpoint import Endpoint
 
 class UserEndpoint(Endpoint):
 
-    def get_user(self):
-        res = self.api_client.get(self.endpoint_user)
-        return res.json()["Response"]
+    def get_logged_in_user(self):
+        return self.make_get_request(self.endpoint_user)
 
     def get_user_person_by_id(self, user_id):
         endpoint = "%s/%d" % (self.endpoint_user_person, user_id)
-        res = self.api_client.get(endpoint)
-        return res.json()["Response"]
+
+        return self.make_get_request(endpoint)
 
     def get_user_company_by_id(self, user_id):
         endpoint = "%s/%d" % (self.endpoint_user_company, user_id)
-        res = self.api_client.get(endpoint)
-        return res.json()["Response"]
+
+        return self.make_get_request(endpoint)
 

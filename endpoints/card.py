@@ -3,21 +3,20 @@ from endpoints.endpoint import Endpoint
 
 class Card(Endpoint):
 
-    def get_card_for_user_all(self, user_id):
-        endpoint = "%s/%d/%s" % (
+    def get_base_endpoint(self, user_id):
+        return "%s/%d/%s" % (
             self.endpoint_user,
             user_id,
             self.endpoint_card
         )
-        res = self.api_client.get(endpoint)
-        return res.json()["Response"]
+
+    def get_all_cards_for_user(self, user_id):
+        endpoint = self.get_base_endpoint(user_id)
+
+        return self.make_get_request(endpoint)
 
     def get_card_for_user_by_id(self, user_id, card_id):
-        endpoint = "%s/%d/%s/%d" % (
-            self.endpoint_user,
-            user_id,
-            self.endpoint_card,
-            card_id
-        )
-        res = self.api_client.get(endpoint)
-        return res.json()["Response"]
+        endpoint = self.get_base_endpoint(user_id)
+        endpoint += "/%d" % card_id
+
+        return self.make_get_request(endpoint)
