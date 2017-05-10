@@ -26,23 +26,19 @@ class ApiClient:
 
     def post(self, endpoint, payload):
         action = 'POST /v%d/%s' % (self.__version_api, endpoint)
-        msg = self.create_message(action, payload)
-
         headers_all = copy.deepcopy(self.headers)
+        msg = self.create_message(action, headers_all, payload)
 
         if self.privkey is not None:
             headers_all['X-Bunq-Client-Signature'] = self.sign(msg)
-        print(self.sign(msg))
-        url = '%s/%s' % (self.__uri, endpoint)
 
-        print(json.dumps(headers_all, indent=4))
-        print(msg)
+        url = '%s/%s' % (self.__uri, endpoint)
 
         return requests.request('POST', url, headers=headers_all, json=payload)
 
-    def create_message(self, action, payload):
+    def create_message(self, action, headers, payload):
         headers_as_text = '\n'.join(['%s: %s' % (k, v) for k, v in sorted(
-                self.headers.items())])
+                headers.items())])
         msg = '%s\n%s\n\n' % (action, headers_as_text)
 
         if payload:
