@@ -1,4 +1,4 @@
-from endpoints.endpoint_renamed import Endpoint
+from endpoints.endpoint import Endpoint
 
 
 class MonetaryBankEndpoint(Endpoint):

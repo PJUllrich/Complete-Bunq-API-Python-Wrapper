@@ -1,1 +1,1 @@
-from .controller_renamed import Controller
+from .controller import Controller
