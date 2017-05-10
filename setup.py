@@ -9,11 +9,11 @@ register_key_pair()
 
 # Third, we create a new device server (i.e. register a new device)
 # Ref: https://doc.bunq.com/api/1/call/device-server/method/post
-create_new_device_server()
+# create_new_device_server()
 
 # Fourth, we create a new session for making calls
 # Ref: https://doc.bunq.com/api/1/call/session-server/method/post
-create_new_session()
+# create_new_session()
 
 # Fifth, we retrieve and save the ID of the User
 # Caveat: If you have multiple users, this will only save the ID of the first user

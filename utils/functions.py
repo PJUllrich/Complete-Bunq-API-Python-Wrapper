@@ -11,7 +11,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 
 from config import Controller
-from ApiClient import ApiClient
+from api_client import ApiClient
 
 config = Controller()
 api_client = ApiClient()
