@@ -1,1 +1,1 @@
-from . import EndpointController
+from . import controller
