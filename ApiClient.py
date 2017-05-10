@@ -22,19 +22,27 @@ class ApiClient:
         self.config = Controller()
 
     def get(self, endpoint, verify=False):
-        pass
+        return self.request('GET', endpoint)
 
     def post(self, endpoint, payload):
-        action = 'POST /v%d/%s' % (self.__version_api, endpoint)
+        return self.request('POST', endpoint, payload)
+
+    def request(self, method, endpoint, payload=None):
+        headers = self.create_headers(method, endpoint, payload)
+
+        url = '%s/%s' % (self.__uri, endpoint)
+
+        return requests.request(method, url, headers=headers, json=payload)
+
+    def create_headers(self, method, endpoint, payload):
+        action = '%s /v%d/%s' % (method.upper(), self.__version_api, endpoint)
         headers_all = copy.deepcopy(self.headers)
         msg = self.create_message(action, headers_all, payload)
 
         if self.privkey is not None:
             headers_all['X-Bunq-Client-Signature'] = self.sign(msg)
 
-        url = '%s/%s' % (self.__uri, endpoint)
-
-        return requests.request('POST', url, headers=headers_all, json=payload)
+        return headers_all
 
     def create_message(self, action, headers, payload):
         headers_as_text = '\n'.join(['%s: %s' % (k, v) for k, v in sorted(
@@ -115,7 +123,9 @@ class ApiClient:
             'X-Bunq-Language': 'en_US',
             'X-Bunq-Region': 'en_US'
         }
-        if self.user_token is not None:
+        if self.session_token is not None:
+            headers['X-Bunq-Client-Authentication'] = self.session_token
+        elif self.user_token is not None:
             headers['X-Bunq-Client-Authentication'] = self.user_token
 
         return headers
@@ -127,6 +137,10 @@ class ApiClient:
     @property
     def server_token(self):
         return self.config.get('server_token')
+
+    @property
+    def session_token(self):
+        return self.config.get('session_token')
 
     @property
     def pubkey(self):

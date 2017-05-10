@@ -118,7 +118,7 @@ def get_user_id():
     
     :return: Prints out either a success message or the Error message of the API
     """
-    r = api_client.get('user', verify=True)
+    r = api_client.get('user')
     if r.status_code == 200:
         res = [x for x in r.json()['Response'] if list(x)[0] == 'UserPerson'][0]
         user_id = res['UserPerson']['id']
