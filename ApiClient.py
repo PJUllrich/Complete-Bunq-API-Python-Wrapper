@@ -21,8 +21,13 @@ class ApiClient:
     def __init__(self):
         self.config = Controller()
 
-    def get(self, endpoint, verify=False):
-        return self.request('GET', endpoint)
+    def get(self, endpoint):
+        result = self.request('GET', endpoint)
+
+        if self.verify(result):
+            return result
+
+        return None
 
     def post(self, endpoint, payload):
         return self.request('POST', endpoint, payload)
@@ -100,7 +105,7 @@ class ApiClient:
         signature = base64.b64decode(res.headers['X-Bunq-Server-Signature'])
 
         try:
-            self.server_pubkey.verify(
+            self.server_pubkey_pem.verify(
                 signature,
                 msg.encode(),
                 padding.PKCS1v15(),
@@ -152,13 +157,8 @@ class ApiClient:
 
     @property
     def privkey_pem(self):
-        key = self.privkey
-
-        if not isinstance(key, bytes):
-            key = key.encode()
-
         return serialization.load_pem_private_key(
-            key,
+            self.privkey.encode(),
             password=None,
             backend=default_backend()
         )
@@ -171,4 +171,9 @@ class ApiClient:
     def server_pubkey(self):
         return self.config.get('server_pubkey')
 
-
+    @property
+    def server_pubkey_pem(self):
+        return serialization.load_pem_public_key(
+            self.server_pubkey.encode(),
+            backend=default_backend()
+        )
