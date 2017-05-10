@@ -1,4 +1,4 @@
-from endpoints.endpoint import Endpoint
+from endpoints.endpoint_renamed import Endpoint
 
 
 class Card(Endpoint):
@@ -14,4 +14,3 @@ class Card(Endpoint):
         endpoint = "user/%d/%s/%d" % (user_id, self.endpoint_card, card_id)
         res = self.api_client.get(endpoint)
         return res.json()["Response"]
-    
