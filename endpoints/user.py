@@ -3,10 +3,6 @@ from endpoints.endpoint import Endpoint
 
 class UserEndpoint(Endpoint):
 
-    endpoint_user = "user"
-    endpoint_user_person = "user-person"
-    endpoint_user_company = "user-company"
-
     def get_user(self):
         res = self.api_client.get(self.endpoint_user)
         return res.json()["Response"]
