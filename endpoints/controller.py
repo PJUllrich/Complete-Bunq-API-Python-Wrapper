@@ -10,9 +10,9 @@ from endpoints.monetary_account import MonetaryBankEndpoint
 class Controller:
 
     api_client = ApiClient()
-    user_endpoint = UserEndpoint(api_client)
-    monetary_account_endpoint = MonetaryBankEndpoint(api_client)
-    card_endpoint = Card(api_client)
-    payment_endpoint = Payment(api_client)
-    request_inquiry_endpoint = RequestInquiry(api_client)
-    draft_payment_endpoint = DraftPayment(api_client)
+    user = UserEndpoint(api_client)
+    monetary_account = MonetaryBankEndpoint(api_client)
+    card = Card(api_client)
+    payment = Payment(api_client)
+    request_inquiry = RequestInquiry(api_client)
+    draft_payment = DraftPayment(api_client)

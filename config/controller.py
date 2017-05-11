@@ -13,7 +13,7 @@ class Controller(object):
         """
 
         self.path = os.path.dirname(os.path.realpath(__file__)) + \
-                    '/ignore/parameters.ini'
+                    '/parameters.ini'
         self.parser = configparser.ConfigParser()
         self.parser.read(self.path)
 
