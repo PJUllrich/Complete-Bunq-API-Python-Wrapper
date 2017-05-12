@@ -12,20 +12,20 @@ class User(Endpoint):
         return "%s/%d" % (cls.endpoint_user, user_id)
 
     def get_all_users(self):
-        return self.__make_get_request(self.endpoint_user)
+        return self._make_get_request(self.endpoint_user)
 
     def get_user_by_id(self, user_id):
         endpoint = self.get_base_endpoint(user_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_user_person_by_id(self, user_id):
         endpoint = self.get_base_endpoint(user_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_user_company_by_id(self, user_id):
         endpoint = "%s/%d" % (self.endpoint_user_company, user_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 

@@ -20,12 +20,12 @@ class ChatConversation(User):
     def get_all_chat_conversations_for_user(self, user_id):
         endpoint = self.get_base_endpoint(user_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_chat_conversation_by_id(self, user_id, chat_id):
         endpoint = self.get_base_endpoint(user_id, chat_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     # Message Logic
     def get_all_messages_for_chat_conversation(self, user_id, chat_id):
@@ -34,7 +34,7 @@ class ChatConversation(User):
             self.endpoint_chat_conversation_message
         )
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     # Attachment Logic
     def get_attachment_by_id(self, user_id, chat_id, attachment_id):
@@ -44,7 +44,7 @@ class ChatConversation(User):
             attachment_id
         )
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_attachment_content(self, user_id, chat_id, attachment_id):
         endpoint = self.get_base_endpoint(user_id, chat_id)
@@ -54,4 +54,4 @@ class ChatConversation(User):
             self.endpoint_chat_conversation_attachment_content
         )
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)

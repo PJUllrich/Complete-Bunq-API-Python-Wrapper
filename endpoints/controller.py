@@ -17,7 +17,7 @@ from .user import User
 class Controller:
     api_client = ApiClient()
     user = User(api_client)
-    account = MonetaryAccount(api_client)
+    monetary_account = MonetaryAccount(api_client)
     card = Card(api_client)
     payment = Payment(api_client)
     request_inquiry = RequestInquiry(api_client)

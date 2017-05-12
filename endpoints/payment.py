@@ -18,13 +18,13 @@ class Payment(MonetaryAccount):
         endpoint = self.get_base_endpoint(user_id, account_id)
         endpoint += "/%s" % self.endpoint_payment
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_payment_by_id(self, user_id, account_id, payment_id):
         endpoint = self.get_base_endpoint(user_id, account_id)
         endpoint += "/%s/%d" % (self.endpoint_payment, payment_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_chat_for_payment(self, user_id, account_id, payment_id):
         endpoint = self.get_base_endpoint(user_id, account_id)
@@ -34,7 +34,7 @@ class Payment(MonetaryAccount):
             self.endpoint_chat
         )
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     # Payment Batch Logic
     def get_all_payments_batches_for_account(self, user_id,
@@ -42,10 +42,10 @@ class Payment(MonetaryAccount):
         endpoint = self.get_base_endpoint(user_id, account_id)
         endpoint += "/%s" % self.endpoint_payment_batch
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_payment_batch_by_id(self, user_id, account_id, batch_id):
         endpoint = self.get_base_endpoint(user_id, account_id)
         endpoint += "/%s/%d" % (self.endpoint_payment_batch, batch_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)

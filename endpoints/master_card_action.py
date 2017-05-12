@@ -16,9 +16,9 @@ class MasterCardAction(MonetaryAccount):
     def get_all_master_card_actions_for_account(self, user_id, account_id):
         endpoint = self.get_base_endpoint(user_id, account_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_master_card_action_by_id(self, user_id, account_id, action_id):
         endpoint = self.get_base_endpoint(user_id, account_id, action_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)

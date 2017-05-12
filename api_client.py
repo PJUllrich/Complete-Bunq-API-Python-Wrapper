@@ -16,8 +16,8 @@ class ApiClient:
 
     __version_api = 1
     __version = '0.0.1'
-    __uri = f"https://api.bunq.com/v{__version_api}"
     # __uri = f"https://api.bunq.com/v{__version_api}"
+    __uri = f"https://sandbox.public.api.bunq.com/v{__version_api}"
 
     def __init__(self):
         self.config = Controller()

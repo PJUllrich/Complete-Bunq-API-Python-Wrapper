@@ -17,9 +17,9 @@ class MonetaryAccount(User):
     def get_all_accounts_for_user(self, user_id):
         endpoint = self.get_base_endpoint(user_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_account_by_id(self, user_id, account_id):
         endpoint = self.get_base_endpoint(user_id, account_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)

@@ -16,9 +16,9 @@ class CertificatePinned(User):
     def get_all_pinned_certificates_for_user(self, user_id):
         endpoint = self.get_base_endpoint(user_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_pinned_certificate_by_id(self, user_id, certificate_id):
         endpoint = self.get_base_endpoint(user_id, certificate_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)

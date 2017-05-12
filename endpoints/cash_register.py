@@ -19,19 +19,19 @@ class CashRegister(MonetaryAccount):
     def get_all_cash_registers_for_account(self, user_id, account_id):
         endpoint = self.get_base_endpoint(user_id, account_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_cash_register_by_id(self, user_id, account_id, cash_id):
         endpoint = self.get_base_endpoint(user_id, account_id, cash_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     # Cash Register QR Code Logic
     def get_all_qr_codes_for_cash_register(self, user_id, account_id, cash_id):
         endpoint = self.get_base_endpoint(user_id, account_id, cash_id)
         endpoint += "/%s" % self.endpoint_cash_register_qr
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_qr_code_by_id(self, user_id, account_id, cash_id, code_id):
         endpoint = self.get_base_endpoint(user_id, account_id, cash_id)
@@ -40,7 +40,7 @@ class CashRegister(MonetaryAccount):
             code_id
         )
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     # QR Code Content
     def get_content_for_qr_code(self, user_id, account_id, cash_id, code_id):
@@ -50,4 +50,4 @@ class CashRegister(MonetaryAccount):
             code_id,
             self.endpoint_cash_register_qr_content
         )
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)

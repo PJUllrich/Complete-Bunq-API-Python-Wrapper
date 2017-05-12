@@ -18,7 +18,7 @@ class Schedule(MonetaryAccount):
     def get_all_schedules_for_account(self, user_id, account_id):
         endpoint = self.get_base_endpoint(user_id, account_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_all_schedules_for_user(self, user_id):
         endpoint = "/%s/%d/%s" % (
@@ -26,19 +26,19 @@ class Schedule(MonetaryAccount):
             user_id,
             self.endpoint_schedule
         )
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_schedule_by_id(self, user_id, account_id, schedule_id):
         endpoint = self.get_base_endpoint(user_id, account_id, schedule_id)
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     # Schedule Instance Logic
     def get_all_instances_for_schedule(self, user_id, account_id, schedule_id):
         endpoint = self.get_base_endpoint(user_id, account_id, schedule_id)
         endpoint += "/%s" % self.endpoint_schedule_instance
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
     def get_schedule_instance_by_id(self, user_id, account_id, schedule_id,
                                     instance_id):
@@ -48,6 +48,6 @@ class Schedule(MonetaryAccount):
             instance_id
         )
 
-        return self.__make_get_request(endpoint)
+        return self._make_get_request(endpoint)
 
 

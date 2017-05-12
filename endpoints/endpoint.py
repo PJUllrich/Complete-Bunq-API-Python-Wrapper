@@ -5,7 +5,6 @@ class Endpoint(object):
 
     endpoint_chat = "chat"
 
-
     # TODO Implement the endpoint for these urls
     endpoint_share_inquiry = "share-invite-bank-inquiry"
     endpoint_share_response = "share-invite-bank-response"
@@ -25,6 +24,6 @@ class Endpoint(object):
     def __init__(self, api_client):
         self.api_client = api_client
 
-    def __make_get_request(self, endpoint):
+    def _make_get_request(self, endpoint):
         res = self.api_client.get(endpoint)
         return res.json()["Response"]
