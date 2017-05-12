@@ -1,24 +1,26 @@
-from endpoints.endpoint import Endpoint
+from endpoints.monetary_account import MonetaryAccount
 
 
-class DraftPayment(Endpoint):
+class DraftPayment(MonetaryAccount):
 
-    def __get_base_endpoint(self, user_id, account_id):
-        return "%s/%d/%s/%d/%s" % (
-            self.endpoint_user,
-            user_id,
-            self.endpoint_monetary_account,
+    endpoint_draft_payment = "draft-payment"
+
+    @classmethod
+    def get_base_endpoint(cls, user_id, account_id):
+        endpoint = MonetaryAccount.get_base_endpoint(user_id)
+        endpoint += "/%d/%s" % (
             account_id,
-            self.endpoint_draft_payment
+            cls.endpoint_draft_payment
         )
+        return endpoint
 
-    def get_all_draft_payments_for_monetary_account(self, user_id, account_id):
-        endpoint = self.__get_base_endpoint(user_id, account_id)
+    def get_all_draft_payments_for_account(self, user_id, account_id):
+        endpoint = self.get_base_endpoint(user_id, account_id)
 
         return self.__make_get_request(endpoint)
 
     def get_draft_payment_by_id(self, user_id, account_id, draft_id):
-        endpoint = self.__get_base_endpoint(user_id, account_id)
+        endpoint = self.get_base_endpoint(user_id, account_id)
         endpoint += "/%d" % draft_id
 
         return self.__make_get_request(endpoint)
