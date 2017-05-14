@@ -1,13 +1,8 @@
-from builtins import object
 
 
-class Endpoint(object):
+class Endpoint:
 
     endpoint_chat = "chat"
-
-    # TODO Implement the endpoint for these urls
-
-
 
     def __init__(self, api_client):
         self.api_client = api_client
