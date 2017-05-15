@@ -3,6 +3,7 @@ This project aims to have a complete Python wrapper for the [Bunq API](https://d
 
 This project is built in **Python 3.6**
 
+[![Build Status](https://travis-ci.org/PJUllrich/Complete-Bunq-API-Python-Wrapper.svg?branch=master)](https://travis-ci.org/PJUllrich/Complete-Bunq-API-Python-Wrapper)
 [![BCH compliance](https://bettercodehub.com/edge/badge/PJUllrich/Complete-Bunq-API-Python-Wrapper?branch=master)](https://bettercodehub.com/)
 [![Test Coverage](https://coveralls.io/repos/github/PJUllrich/Complete-Bunq-API-Python-Wrapper/badge.svg?branch=master)](https://coveralls.io/github/PJUllrich/Complete-Bunq-API-Python-Wrapper?branch=master) 
 [![Updates](https://pyup.io/repos/github/PJUllrich/Complete-Bunq-API-Python-Wrapper/shield.svg)](https://pyup.io/repos/github/PJUllrich/Complete-Bunq-API-Python-Wrapper/)
