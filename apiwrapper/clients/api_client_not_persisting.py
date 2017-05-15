@@ -4,11 +4,11 @@ from apiwrapper.clients.api_client import ApiClient
 
 class ApiClientNonPersisting(ApiClient):
 
-    def __init__(self, privkey, api_key, user_token=None, session_token=None,
-                 server_pubkey=None):
+    def __init__(self, privkey, api_key, installation_token=None,
+                 session_token=None, server_pubkey=None):
         super().__init__(api_key)
         self.__privkey = privkey
-        self.__user_token = user_token
+        self.__installation_token = installation_token
         self.__session_token = session_token
         self.__server_pubkey = server_pubkey
         self.__api_key = api_key
@@ -16,16 +16,16 @@ class ApiClientNonPersisting(ApiClient):
     def set_session_token(self, token):
         self.__session_token = token
 
-    def set_user_token(self, token):
-        self.__user_token = token
+    def set_installation_token(self, token):
+        self.__installation_token = token
 
     @property
-    def user_token(self):
-        return self.__user_token
+    def installation_token(self):
+        return self.__installation_token
 
-    @user_token.setter
-    def user_token(self, value):
-        self.__user_token = value
+    @installation_token.setter
+    def installation_token(self, value):
+        self.__installation_token = value
 
     @property
     def server_token(self):

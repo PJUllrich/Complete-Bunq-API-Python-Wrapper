@@ -104,15 +104,15 @@ class Setup:
             server_entry = [x for x in r.json()['Response'] if
                             list(x)[0] == 'ServerPublicKey'][0]
 
-            user_token = token_entry['Token']['token']
+            installation_token = token_entry['Token']['token']
             server_public_key = server_entry['ServerPublicKey'][
                 'server_public_key']
 
-            self.api_client.user_token = user_token
+            self.api_client.installation_token = installation_token
             self.api_client.server_pubkey = server_public_key
 
             print('Key pair was registered successfully.')
-            print("User Token: %s" % user_token)
+            print("Installation Token: %s" % installation_token)
             print("Server Public Key: %s" % server_public_key)
 
             return True

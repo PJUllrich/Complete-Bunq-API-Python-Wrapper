@@ -132,18 +132,18 @@ class ApiClient:
         }
         if self.session_token is not None:
             headers['X-Bunq-Client-Authentication'] = self.session_token
-        elif self.user_token is not None:
-            headers['X-Bunq-Client-Authentication'] = self.user_token
+        elif self.installation_token is not None:
+            headers['X-Bunq-Client-Authentication'] = self.installation_token
 
         return headers
 
     @property
-    def user_token(self):
-        return self.config.get('user_token')
+    def installation_token(self):
+        return self.config.get('installation_token')
 
-    @user_token.setter
-    def user_token(self, value):
-        self.config.set('user_token', value)
+    @installation_token.setter
+    def installation_token(self, value):
+        self.config.set('installation_token', value)
 
     @property
     def server_token(self):
