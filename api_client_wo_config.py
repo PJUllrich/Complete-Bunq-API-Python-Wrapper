@@ -6,11 +6,12 @@ from api_client import ApiClient
 
 class ApiClientWOConfig(ApiClient):
 
-    def __init__(self, privkey_pem, token='', servkey_pem=''):
+    def __init__(self, privkey_pem, token='', servkey_pem='', api_key=''):
         super().__init__()
         self.__privkey_pem = privkey_pem
         self.__token = token
         self.__servkey_pem = servkey_pem
+        self.__api_key = api_key
 
     @property
     def user_token(self):
@@ -36,8 +37,12 @@ class ApiClientWOConfig(ApiClient):
 
     @property
     def privkey(self):
+        privkey_pem_bytes = self.privkey_pem
+        if not isinstance(privkey_pem_bytes, bytes):
+            privkey_pem_bytes = privkey_pem_bytes.encode()
+
         return serialization.load_pem_private_key(
-            self.__privkey_pem,
+            privkey_pem_bytes,
             password=None,
             backend=default_backend()
         )
@@ -48,7 +53,7 @@ class ApiClientWOConfig(ApiClient):
 
     @property
     def api_key(self):
-        return None
+        return self.__api_key
 
     @property
     def server_pubkey(self):
