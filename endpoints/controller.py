@@ -1,4 +1,3 @@
-from api_client import ApiClient
 from endpoints.annual_overview import AnnualOverview
 from endpoints.attachment_public import AttachmentPublic
 from endpoints.attachment_tab import AttachmentTab
@@ -24,26 +23,28 @@ from endpoints.user import User
 
 
 class Controller:
-    api_client = ApiClient()
-    user = User(api_client)
-    monetary_account = MonetaryAccount(api_client)
-    card = Card(api_client)
-    payment = Payment(api_client)
-    request_inquiry = RequestInquiry(api_client)
-    draft_payment = DraftPayment(api_client)
-    schedule = Schedule(api_client)
-    scheduled_payment = ScheduledPayment(api_client)
-    cash_register = CashRegister(api_client)
-    master_card_action = MasterCardAction(api_client)
-    chat_conversation = ChatConversation(api_client)
-    certificate_pinned = CertificatePinned(api_client)
-    invoice = Invoice(api_client)
-    annual_overview = AnnualOverview(api_client)
-    attachment_public = AttachmentPublic(api_client)
-    attachment_tab = AttachmentTab(api_client)
-    avatar = Avatar(api_client)
-    customer_statement = CustomerStatement(api_client)
-    draft_invite = DraftShareInviteBank(api_client)
-    share_inquiry = ShareInviteBankInquiry(api_client)
-    share_response = ShareInviteBankResponse(api_client)
-    tab = Tab(api_client)
+
+    def __init__(self, api_client):
+        self.api_client = api_client
+        self.user = User(api_client)
+        self.monetary_account = MonetaryAccount(api_client)
+        self.card = Card(api_client)
+        self.payment = Payment(api_client)
+        self.request_inquiry = RequestInquiry(api_client)
+        self.draft_payment = DraftPayment(api_client)
+        self.schedule = Schedule(api_client)
+        self.scheduled_payment = ScheduledPayment(api_client)
+        self.cash_register = CashRegister(api_client)
+        self.master_card_action = MasterCardAction(api_client)
+        self.chat_conversation = ChatConversation(api_client)
+        self.certificate_pinned = CertificatePinned(api_client)
+        self.invoice = Invoice(api_client)
+        self.annual_overview = AnnualOverview(api_client)
+        self.attachment_public = AttachmentPublic(api_client)
+        self.attachment_tab = AttachmentTab(api_client)
+        self.avatar = Avatar(api_client)
+        self.customer_statement = CustomerStatement(api_client)
+        self.draft_invite = DraftShareInviteBank(api_client)
+        self.share_inquiry = ShareInviteBankInquiry(api_client)
+        self.share_response = ShareInviteBankResponse(api_client)
+        self.tab = Tab(api_client)
