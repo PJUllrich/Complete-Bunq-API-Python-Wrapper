@@ -1,26 +1,26 @@
 import base64
-import json
 import copy
-import requests
+import json
 import uuid
 
+import requests
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 
-from config import Controller
+from config.configcontroller import ConfigController as ConfigController
 
 
 class ApiClient:
-
     __version_api = 1
     __version = '0.1.0'
     # __uri = "https://api.bunq.com/v%d" % __version_api
     __uri = "https://sandbox.public.api.bunq.com/v%d" % __version_api
 
-    def __init__(self):
-        self.config = Controller()
+    def __init__(self, api_key):
+        self.config = ConfigController()
+        self.api_key = api_key
 
     def get(self, endpoint):
         result = self.request('GET', endpoint)
@@ -34,6 +34,7 @@ class ApiClient:
         return self.request('POST', endpoint, payload)
 
     def request(self, method, endpoint, payload=None):
+        payload = json.dumps(payload)
         headers = self.create_headers(method, endpoint, payload)
 
         url = '%s%s' % (self.__uri, endpoint)
@@ -52,7 +53,7 @@ class ApiClient:
 
     def create_message(self, action, headers, payload):
         headers_as_text = '\n'.join(['%s: %s' % (k, v) for k, v in sorted(
-                headers.items())])
+            headers.items())])
         msg = '%s\n%s\n\n' % (action, headers_as_text)
 
         if payload:
@@ -140,6 +141,10 @@ class ApiClient:
     def user_token(self):
         return self.config.get('user_token')
 
+    @user_token.setter
+    def user_token(self, value):
+        self.config.set('user_token', value)
+
     @property
     def server_token(self):
         return self.config.get('server_token')
@@ -147,6 +152,10 @@ class ApiClient:
     @property
     def session_token(self):
         return self.config.get('session_token')
+
+    @session_token.setter
+    def session_token(self, value):
+        self.config.set('session_token', value)
 
     @property
     def pubkey(self):
@@ -158,8 +167,12 @@ class ApiClient:
 
     @property
     def privkey_pem(self):
+        private_key_bytes = self.privkey
+        if not isinstance(private_key_bytes, bytes):
+            private_key_bytes = private_key_bytes.encode()
+
         return serialization.load_pem_private_key(
-            self.privkey.encode(),
+            private_key_bytes,
             password=None,
             backend=default_backend()
         )
@@ -168,13 +181,25 @@ class ApiClient:
     def api_key(self):
         return self.config.get('api_key')
 
+    @api_key.setter
+    def api_key(self, value):
+        self.config.set('api_key', value)
+
     @property
     def server_pubkey(self):
         return self.config.get('server_pubkey')
 
+    @server_pubkey.setter
+    def server_pubkey(self, value):
+        self.config.set('server_pubkey', value)
+
     @property
     def server_pubkey_pem(self):
+        server_pubkey_bytes = self.server_pubkey
+        if not isinstance(server_pubkey_bytes, bytes):
+            server_pubkey_bytes = server_pubkey_bytes.encode()
+
         return serialization.load_pem_public_key(
-            self.server_pubkey.encode(),
+            server_pubkey_bytes,
             backend=default_backend()
         )

@@ -8,7 +8,7 @@ class AttachmentPublic(Endpoint):
 
     @classmethod
     def get_base_endpoint(cls, attachment_id):
-        return "%s/%s" % (cls.endpoint_attachment_public, attachment_id)
+        return "/%s/%s" % (cls.endpoint_attachment_public, attachment_id)
 
     def get_public_attachment_by_id(self, attachment_id):
         endpoint = self.get_base_endpoint(attachment_id)

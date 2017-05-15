@@ -1,7 +1,7 @@
 from unittest.case import TestCase
 from unittest.mock import MagicMock
 
-from api_client import ApiClient
+from api_clients.api_client import ApiClient
 
 
 class EndpointTest(TestCase):

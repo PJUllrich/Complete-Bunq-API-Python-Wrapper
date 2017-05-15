@@ -37,8 +37,7 @@ class Payment(MonetaryAccount):
         return self._make_get_request(endpoint)
 
     # Payment Batch Logic
-    def get_all_payments_batches_for_account(self, user_id,
-                                                      account_id):
+    def get_all_payments_batches_for_account(self, user_id, account_id):
         endpoint = self.get_base_endpoint(user_id, account_id)
         endpoint += "/%s" % self.endpoint_payment_batch
 

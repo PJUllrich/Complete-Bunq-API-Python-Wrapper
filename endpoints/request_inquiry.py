@@ -1,9 +1,8 @@
-from endpoints.endpoint import Endpoint
 from endpoints.monetary_account import MonetaryAccount
+from endpoints.payment import Payment
 
 
-class RequestInquiry(MonetaryAccount):
-
+class RequestInquiry(MonetaryAccount, Payment):
     endpoint_request_inquiry = "request-inquiry"
 
     @classmethod

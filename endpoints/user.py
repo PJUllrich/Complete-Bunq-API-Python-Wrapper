@@ -9,7 +9,7 @@ class User(Endpoint):
 
     @classmethod
     def get_base_endpoint(cls, user_id):
-        return "%s/%d" % (cls.endpoint_user, user_id)
+        return "/%s/%d" % (cls.endpoint_user, user_id)
 
     def get_all_users(self):
         return self._make_get_request(self.endpoint_user)
@@ -20,12 +20,12 @@ class User(Endpoint):
         return self._make_get_request(endpoint)
 
     def get_user_person_by_id(self, user_id):
-        endpoint = "%s/%d" % (self.endpoint_user_person, user_id)
+        endpoint = "/%s/%d" % (self.endpoint_user_person, user_id)
 
         return self._make_get_request(endpoint)
 
     def get_user_company_by_id(self, user_id):
-        endpoint = "%s/%d" % (self.endpoint_user_company, user_id)
+        endpoint = "/%s/%d" % (self.endpoint_user_company, user_id)
 
         return self._make_get_request(endpoint)
 

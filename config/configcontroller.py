@@ -1,19 +1,22 @@
 import configparser
+
 import os
 
 
-class Controller(object):
-    """A controller class for getting and setting key/value pairs in the config file
+class ConfigController:
+    """A controller class for getting and setting key/value pairs 
+    in the config file
     """
 
     section_default = 'BunqAPI'
 
     def __init__(self):
-        """Create an instance of a config controller for getting and setting information
+        """Create an instance of a config controller for getting 
+        and setting information
         """
 
-        self.path = os.path.dirname(os.path.realpath(__file__)) + \
-                    '/parameters.ini'
+        self.path = os.path.dirname(os.path.realpath(__file__)) \
+                    + '/parameters.ini'
         self.parser = configparser.ConfigParser()
         self.parser.read(self.path)
 
@@ -25,8 +28,10 @@ class Controller(object):
             return None
 
     def set(self, name, val, section=section_default):
-        """Sets an entry in the default section of the config file to a specifieg value
-        :param section: [Optional] The section in which an entry should be changed
+        """Sets an entry in the default section of the config file to a 
+        specified value
+        :param section: [Optional] The section in which an entry 
+        should be changed
         :param name: The entry whose value should be changed
         :param val: The new value for the specified entry
         :return: Nothing, but happiness

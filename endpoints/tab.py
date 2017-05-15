@@ -9,7 +9,7 @@ class Tab(Endpoint):
 
     @classmethod
     def get_base_endpoint(cls, tab_id, attachment_id):
-        return "%s/%s/%s/%d" % (
+        return "/%s/%s/%s/%d" % (
             cls.endpoint_tab,
             tab_id,
             cls.endpoint_tab_attachment,
