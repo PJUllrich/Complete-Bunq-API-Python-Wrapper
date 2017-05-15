@@ -1,7 +1,7 @@
 import unittest
 
+from apiwrapper.endpoints.attachment_tab import AttachmentTab
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
-from attachment_tab import AttachmentTab
 
 
 class AttachmentTabTest(EndpointTest, unittest.TestCase):
