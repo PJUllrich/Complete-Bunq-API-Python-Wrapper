@@ -7,7 +7,6 @@ install:
   - pip install coveralls
 # command to run tests
 script:
-  coverage run --source=apiwrapper manage.py test
-  python3 -m unittest
+  coverage run -m unittest
 after_success:
   coveralls
