@@ -3,6 +3,12 @@ This project aims to have a complete Python wrapper for the [Bunq API](https://d
 
 This project is built in **Python 3.6**
 
+[![Build Status](https://travis-ci.org/PJUllrich/Complete-Bunq-API-Python-Wrapper.svg?branch=master)](https://travis-ci.org/PJUllrich/Complete-Bunq-API-Python-Wrapper)
+[![BCH compliance](https://bettercodehub.com/edge/badge/PJUllrich/Complete-Bunq-API-Python-Wrapper?branch=master)](https://bettercodehub.com/)
+[![Test Coverage](https://coveralls.io/repos/github/PJUllrich/Complete-Bunq-API-Python-Wrapper/badge.svg?branch=master)](https://coveralls.io/github/PJUllrich/Complete-Bunq-API-Python-Wrapper?branch=master) 
+[![Updates](https://pyup.io/repos/github/PJUllrich/Complete-Bunq-API-Python-Wrapper/shield.svg)](https://pyup.io/repos/github/PJUllrich/Complete-Bunq-API-Python-Wrapper/)
+[![Python 3](https://pyup.io/repos/github/PJUllrich/Complete-Bunq-API-Python-Wrapper/python-3-shield.svg)](https://pyup.io/repos/github/PJUllrich/Complete-Bunq-API-Python-Wrapper/)
+
 ## Getting started
 1. First enter your [API Key](https://www.bunq.com/en/api) in the `/config/parameters.ini` file.
 2. Next, [create a new Virtual Enviroment](https://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) based on **Python 3.6**
