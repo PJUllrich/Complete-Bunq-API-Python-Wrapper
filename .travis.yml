@@ -1,7 +1,13 @@
 language: python
 python:
-  - "3.6"
+  - 3.6
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
 # command to run tests
-script: python3 -m unittest
+script:
+  coverage run --source=apiwrapper manage.py test
+  python3 -m unittest
+after_success:
+  coveralls
