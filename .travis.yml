@@ -7,6 +7,6 @@ install:
   - pip install coveralls
 # command to run tests
 script:
-  coverage run test.py
+  coverage run --source apiwrapper --omit ~/virtualenv/* test.py
 after_success:
   coveralls
