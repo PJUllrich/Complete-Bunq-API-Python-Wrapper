@@ -74,14 +74,14 @@ class Setup:
             format=serialization.PublicFormat.SubjectPublicKeyInfo
         ).decode()
 
-        print('New key pair was created!.')
+        print('New key pair was created')
 
         if save_to_config:
             self.config.set('key_private', private_key_decoded)
             self.config.set('key_public', public_key_decoded)
         else:
-            print("New Private Key: %s" % private_key_decoded)
-            print("New Public Key:  %s" % public_key_decoded)
+            print('\tNew Private Key: %s' % private_key_decoded)
+            print('\tNew Public Key:  %s' % public_key_decoded)
 
         return private_key_decoded, public_key_decoded
 
@@ -99,7 +99,7 @@ class Setup:
 
         r = self.endpoints.installation.create_installation()
         try:
-            res = r["Response"]
+            res = r['Response']
 
             token_entry = [x for x in res if list(x)[0] == 'Token'][0]
             server_entry = [x for x in res if
@@ -112,9 +112,9 @@ class Setup:
             self.api_client.installation_token = installation_token
             self.api_client.server_pubkey = server_public_key
 
-            print('Key pair was registered successfully.')
-            print("Installation Token: %s" % installation_token)
-            print("Server Public Key: %s" % server_public_key)
+            print('Key pair was registered successfully')
+            print('\tInstallation Token: %s' % installation_token)
+            print('\tServer Public Key: %s' % server_public_key)
 
             return True
         except KeyError:
@@ -134,12 +134,12 @@ class Setup:
             description="New Device")
 
         try:
-            res = r["Response"]
+            res = r['Response']
 
             print('New device server was created successfully.')
             return True
         except KeyError:
-            print('New Device Server Error: ' + str(r.json()['Error'][0]))
+            print('New Device Server Error: ' + str(r['Error'][0]))
             return False
 
     def create_new_session(self):
@@ -165,7 +165,7 @@ class Setup:
             self.api_client.session_token = session_token
 
             print('New session was created successfully.')
-            print("New Session Token: %s" % session_token)
+            print('\tNew Session Token: %s' % session_token)
             return True
         except KeyError:
             print('Create Session Error: ' + str(r['Error'][0]))

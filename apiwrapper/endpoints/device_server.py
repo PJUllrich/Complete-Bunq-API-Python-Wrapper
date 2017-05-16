@@ -25,8 +25,8 @@ class DeviceServer(Endpoint):
     def create_new_device_server(self, description, permitted_ips=None):
         endpoint = self.get_base_endpoint()
         payload = {
-            "description": description,
-            "secret": self.api_client.api_key
+            'description': description,
+            'secret': self.api_client.api_key
         }
         if permitted_ips is not None:
             payload["permitted_ips"] = permitted_ips

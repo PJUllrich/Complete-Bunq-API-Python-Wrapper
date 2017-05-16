@@ -38,7 +38,6 @@ class ApiClient:
         return self.request('POST', endpoint, payload)
 
     def request(self, method, endpoint, payload=None):
-        payload = json.dumps(payload)
         headers = self.create_headers(method, endpoint, payload)
 
         url = '%s%s' % (self.__uri, endpoint)
@@ -46,7 +45,7 @@ class ApiClient:
         return requests.request(method, url, headers=headers, json=payload)
 
     def create_headers(self, method, endpoint, payload):
-        action = '%s /v%d/%s' % (method.upper(), self.__version_api, endpoint)
+        action = '%s /v%d%s' % (method.upper(), self.__version_api, endpoint)
         headers_all = copy.deepcopy(self.headers)
         msg = self.create_message(action, headers_all, payload)
 
