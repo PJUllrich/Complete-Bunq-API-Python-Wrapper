@@ -1,7 +1,7 @@
 import unittest
 
+from apiwrapper.endpoints.draft_payment import DraftPayment
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
-from draft_payment import DraftPayment
 
 
 class DraftPaymentTest(EndpointTest, unittest.TestCase):

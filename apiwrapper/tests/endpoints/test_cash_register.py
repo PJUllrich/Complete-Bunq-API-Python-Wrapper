@@ -1,7 +1,7 @@
 import unittest
 
+from apiwrapper.endpoints.cash_register import CashRegister
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
-from cash_register import CashRegister
 
 
 class CashRegisterTest(EndpointTest, unittest.TestCase):

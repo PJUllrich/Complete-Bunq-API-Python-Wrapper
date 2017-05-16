@@ -50,3 +50,4 @@ If you want to contribute, fork this repository and start implementing one of th
 * Add missing Endpoints which are listed in `/endpoints/endpoint`below the `TODO` comment.
 * Add `POST`, `PUT`, and some `DELETE` calls for all endpoints
 * Find a way for Python to wait for the function calls in `setup.py` to finish before calling the next function.
+* Add Encryption/Decryption of `/confid/parameter.ini` file using Password

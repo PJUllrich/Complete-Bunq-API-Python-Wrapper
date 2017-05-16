@@ -1,7 +1,7 @@
 import unittest
 
+from apiwrapper.endpoints.certificate_pinned import CertificatePinned
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
-from certificate_pinned import CertificatePinned
 
 
 class MonetaryAccountTest(EndpointTest, unittest.TestCase):
