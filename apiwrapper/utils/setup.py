@@ -13,7 +13,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from apiwrapper.endpoints.endpointcontroller import EndpointController
 
-from apiwrapper.clients.api_client_not_persisting import ApiClientNonPersisting
+from apiwrapper.clients.api_client_non_persisting import ApiClientNonPersisting
 
 
 class Setup:
@@ -98,10 +98,11 @@ class Setup:
         """
 
         r = self.endpoints.installation.create_installation()
-        if r.status_code == 200:
-            token_entry = [x for x in r.json()['Response'] if
-                           list(x)[0] == 'Token'][0]
-            server_entry = [x for x in r.json()['Response'] if
+        try:
+            res = r["Response"]
+
+            token_entry = [x for x in res if list(x)[0] == 'Token'][0]
+            server_entry = [x for x in res if
                             list(x)[0] == 'ServerPublicKey'][0]
 
             installation_token = token_entry['Token']['token']
@@ -116,8 +117,8 @@ class Setup:
             print("Server Public Key: %s" % server_public_key)
 
             return True
-        else:
-            print('Register Key Pair Error: ' + str(r.json()['Error'][0]))
+        except KeyError:
+            print('Register Key Pair Error: ' + str(r['Error'][0]))
 
             return False
 
@@ -132,10 +133,12 @@ class Setup:
         r = self.endpoints.device_server.create_new_device_server(
             description="New Device")
 
-        if r.status_code == 200:
+        try:
+            res = r["Response"]
+
             print('New device server was created successfully.')
             return True
-        else:
+        except KeyError:
             print('New Device Server Error: ' + str(r.json()['Error'][0]))
             return False
 
@@ -153,8 +156,10 @@ class Setup:
 
         r = self.endpoints.session_server.create_new_session_server()
 
-        if r.status_code == 200:
-            res = [x for x in r.json()['Response'] if list(x)[0] == 'Token'][0]
+        try:
+            res = r["Response"]
+
+            res = [x for x in res if list(x)[0] == 'Token'][0]
             session_token = res['Token']['token']
 
             self.api_client.session_token = session_token
@@ -162,6 +167,6 @@ class Setup:
             print('New session was created successfully.')
             print("New Session Token: %s" % session_token)
             return True
-        else:
-            print('Create Session Error: ' + str(r.json()['Error'][0]))
+        except KeyError:
+            print('Create Session Error: ' + str(r['Error'][0]))
             return False

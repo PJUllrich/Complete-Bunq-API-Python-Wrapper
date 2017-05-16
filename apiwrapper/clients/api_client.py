@@ -18,9 +18,13 @@ class ApiClient:
     # __uri = "https://api.bunq.com/v%d" % __version_api
     __uri = "https://sandbox.public.api.bunq.com/v%d" % __version_api
 
-    def __init__(self, api_key):
+    def __init__(self, api_key=None):
         self.config = ConfigController()
-        self.api_key = api_key
+
+        if api_key is None:
+            self.api_key = self.config.get('api_key')
+        else:
+            self.api_key = api_key
 
     def get(self, endpoint):
         result = self.request('GET', endpoint)
