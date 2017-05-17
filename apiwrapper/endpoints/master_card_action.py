@@ -9,7 +9,7 @@ class MasterCardAction(MonetaryAccount):
     def get_base_endpoint(cls, user_id, account_id, action_id=None):
         endpoint = MonetaryAccount.get_base_endpoint(user_id, account_id)
         endpoint += "/%s" % cls.endpoint_mastercard_action
-        if account_id is not None:
+        if action_id is not None:
             endpoint += "/%d" % action_id
         return endpoint
 

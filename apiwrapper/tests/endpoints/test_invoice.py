@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.invoice import Invoice
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class InvoiceTest(EndpointTest, unittest.TestCase):
+class InvoiceTest(EndpointTest):
     def setUp(self):
         super().setUp(Invoice)
 

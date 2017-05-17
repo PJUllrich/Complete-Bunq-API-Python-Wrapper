@@ -1,11 +1,9 @@
-import unittest
-
 from apiwrapper.endpoints.share_invite_bank_inquiry import \
     ShareInviteBankInquiry
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class ShareInviteBankInquiryTest(EndpointTest, unittest.TestCase):
+class ShareInviteBankInquiryTest(EndpointTest):
     def setUp(self):
         super().setUp(ShareInviteBankInquiry)
 

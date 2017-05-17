@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.user import User
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class UserTest(EndpointTest, unittest.TestCase):
+class UserTest(EndpointTest):
 
     def setUp(self):
         super().setUp(User)

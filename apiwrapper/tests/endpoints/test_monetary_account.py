@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.monetary_account import MonetaryAccount
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class MonetaryAccountTest(EndpointTest, unittest.TestCase):
+class MonetaryAccountTest(EndpointTest):
 
     def setUp(self):
         super().setUp(MonetaryAccount)

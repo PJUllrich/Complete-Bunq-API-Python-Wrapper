@@ -1,11 +1,9 @@
-import unittest
-
 from apiwrapper.endpoints.share_invite_bank_response import \
     ShareInviteBankResponse
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class ShareInviteBankResponseTest(EndpointTest, unittest.TestCase):
+class ShareInviteBankResponseTest(EndpointTest):
 
     def setUp(self):
         super().setUp(ShareInviteBankResponse)

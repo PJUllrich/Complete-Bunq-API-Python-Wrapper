@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.session_server import SessionServer
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class SessionServerTest(EndpointTest, unittest.TestCase):
+class SessionServerTest(EndpointTest):
 
     def setUp(self):
         super().setUp(SessionServer)

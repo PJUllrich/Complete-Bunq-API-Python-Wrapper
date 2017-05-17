@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.annual_overview import AnnualOverview
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class AnnualOverviewTest(EndpointTest, unittest.TestCase):
+class AnnualOverviewTest(EndpointTest):
 
     def setUp(self):
         super().setUp(AnnualOverview)
