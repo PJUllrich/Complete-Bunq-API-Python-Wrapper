@@ -44,7 +44,7 @@ class ApiClientNonPersisting(ApiClient):
         return self.privkey_pem.public_key().public_bytes(
             encoding=serialization.Encoding.PEM,
             format=serialization.PublicFormat.SubjectPublicKeyInfo
-        )
+        ).decode()
 
     @property
     def privkey(self):
@@ -62,4 +62,6 @@ class ApiClientNonPersisting(ApiClient):
     def server_pubkey(self, value):
         self.__server_pubkey = value
 
-
+    @api_key.setter
+    def api_key(self, value):
+        self.__api_key = value
