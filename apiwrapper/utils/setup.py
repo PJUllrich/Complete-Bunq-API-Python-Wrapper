@@ -6,14 +6,14 @@ https://github.com/madeddie/python-bunq
 Thanks for @madeddie for writing these examples and the API Wrapper
 """
 
-from apiwrapper.clients.api_client import ApiClient
+from apiwrapper.clients.api_client_persisting import ApiClientPersisting
 from apiwrapper.config.configcontroller import ConfigController
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from apiwrapper.endpoints.endpointcontroller import EndpointController
 
-from apiwrapper.clients.api_client_non_persisting import ApiClientNonPersisting
+from apiwrapper.clients.api_client import ApiClient
 
 
 class Setup:
@@ -29,9 +29,9 @@ class Setup:
 
     def setup_w_existing_private_key(self, private_key, save_to_config=True):
         if save_to_config:
-            self.api_client = ApiClient(self.api_key)
+            self.api_client = ApiClientPersisting(self.api_key)
         else:
-            self.api_client = ApiClientNonPersisting(private_key, self.api_key)
+            self.api_client = ApiClient(private_key, self.api_key)
 
         self.endpoints = EndpointController(self.api_client)
 

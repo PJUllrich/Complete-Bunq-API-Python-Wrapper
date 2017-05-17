@@ -3,13 +3,13 @@ import uuid
 from unittest.case import TestCase
 from unittest.mock import MagicMock
 
-from apiwrapper.clients.api_client import ApiClient
+from apiwrapper.clients.api_client_persisting import ApiClientPersisting
 
 
 class EndpointTest(TestCase):
 
     def setUp(self, testing_class):
-        self.api_client = ApiClient(str(uuid.uuid4()))
+        self.api_client = ApiClientPersisting(str(uuid.uuid4()))
         self.test_class = testing_class(self.api_client)
         self.test_class._make_get_request = MagicMock(
             side_effect=self.side_effect_get)
