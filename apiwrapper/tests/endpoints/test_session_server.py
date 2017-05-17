@@ -9,7 +9,7 @@ class SessionServerTest(EndpointTest):
 
     def test_get_base_endpoint(self):
         endpoint_should_be = "/session-server"
-        endpoint_to_check = self.test_class.get_base_endpoint()
+        endpoint_to_check = self.test_class._get_base_endpoint()
         self.assert_parameters(endpoint_should_be, endpoint_to_check)
 
     def test_create_new_session_server_endpoint(self):

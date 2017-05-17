@@ -13,7 +13,7 @@ class AvatarTest(EndpointTest, unittest.TestCase):
         endpoint_should_be = "/avatar/%s" % (
             self.random_uuid
         )
-        endpoint_to_check = self.test_class.get_base_endpoint(
+        endpoint_to_check = self.test_class._get_base_endpoint(
             self.random_uuid)
         self.assert_parameters(endpoint_should_be, endpoint_to_check)
 

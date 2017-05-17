@@ -10,7 +10,7 @@ class DraftShareInviteBankTest(EndpointTest):
         endpoint_should_be = "/user/%d/draft-share-invite-bank" % (
                                  self.random_id
                              )
-        endpoint_to_check = self.test_class.get_base_endpoint(
+        endpoint_to_check = self.test_class._get_base_endpoint(
             self.random_id)
         self.assert_parameters(endpoint_should_be, endpoint_to_check)
 

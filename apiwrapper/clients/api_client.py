@@ -77,6 +77,7 @@ class ApiClient:
         :type msg: str
 
         """
+
         return base64.b64encode(
             self.privkey_pem.sign(
                 msg.encode(),
