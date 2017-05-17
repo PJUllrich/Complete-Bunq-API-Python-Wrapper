@@ -25,6 +25,14 @@ class ApiClientPersisting(ApiClient):
         self.config.set('api_key', value)
 
     @property
+    def installation_id(self):
+        return self.config.get('installation_id')
+
+    @installation_id.setter
+    def installation_id(self, value):
+        self.config.set('installation_id', value)
+
+    @property
     def installation_token(self):
         return self.config.get('installation_token')
 

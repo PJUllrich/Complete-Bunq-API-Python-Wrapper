@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.avatar import Avatar
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class AvatarTest(EndpointTest, unittest.TestCase):
+class AvatarTest(EndpointTest):
 
     def setUp(self):
         super().setUp(Avatar)

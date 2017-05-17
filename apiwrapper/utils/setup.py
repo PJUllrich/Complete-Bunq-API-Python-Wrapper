@@ -101,14 +101,17 @@ class Setup:
         try:
             res = r['Response']
 
+            id_entry = [x for x in res if list(x)[0] == 'Id'][0]
             token_entry = [x for x in res if list(x)[0] == 'Token'][0]
             server_entry = [x for x in res if
                             list(x)[0] == 'ServerPublicKey'][0]
 
+            installation_id = id_entry['Id']['id']
             installation_token = token_entry['Token']['token']
             server_public_key = server_entry['ServerPublicKey'][
                 'server_public_key']
 
+            self.api_client.installation_id = installation_id
             self.api_client.installation_token = installation_token
             self.api_client.server_pubkey = server_public_key
 

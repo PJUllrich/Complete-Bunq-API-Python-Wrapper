@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.attachment_public import AttachmentPublic
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class AttachmentPublicTest(EndpointTest, unittest.TestCase):
+class AttachmentPublicTest(EndpointTest):
 
     def setUp(self):
         super().setUp(AttachmentPublic)

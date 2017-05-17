@@ -27,11 +27,9 @@ from apiwrapper.endpoints.tab import Tab
 from apiwrapper.endpoints.user import User
 
 
-
 class EndpointController:
 
     def __init__(self, api_client):
-        self.api_client = api_client
         self.installation = Installation(api_client)
         self.device_server = DeviceServer(api_client)
         self.session_server = SessionServer(api_client)

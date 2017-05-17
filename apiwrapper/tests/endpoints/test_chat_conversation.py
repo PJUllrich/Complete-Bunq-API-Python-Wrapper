@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.chat_conversation import ChatConversation
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class ChatConversationTest(EndpointTest, unittest.TestCase):
+class ChatConversationTest(EndpointTest):
     def setUp(self):
         super().setUp(ChatConversation)
 

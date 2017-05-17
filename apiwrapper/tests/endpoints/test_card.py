@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.card import Card
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class CardTest(EndpointTest, unittest.TestCase):
+class CardTest(EndpointTest):
 
     def setUp(self):
         super().setUp(Card)

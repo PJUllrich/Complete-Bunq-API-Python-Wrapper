@@ -1,10 +1,8 @@
-import unittest
-
 from apiwrapper.endpoints.attachment_tab import AttachmentTab
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class AttachmentTabTest(EndpointTest, unittest.TestCase):
+class AttachmentTabTest(EndpointTest):
     def setUp(self):
         super().setUp(AttachmentTab)
 

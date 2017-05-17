@@ -20,6 +20,10 @@ class ApiClient:
     _uri_production = "https://api.bunq.com/v%d" % __version_api
     _uri_sandbox = "https://sandbox.public.api.bunq.com/v%d" % __version_api
 
+    __installation_id = None
+    __installation_token = None
+    __server_token = None
+
     def __init__(self, privkey, api_key, use_sandbox=True,
                  session_token=None, server_pubkey=None):
         self.__privkey = privkey
@@ -27,8 +31,6 @@ class ApiClient:
         self._uri = self._uri_sandbox if use_sandbox else self._uri_production
         self.__session_token = session_token
         self.__server_pubkey = server_pubkey
-        self.__installation_token = None
-        self.__server_token = None
 
     def get(self, endpoint):
         result = self.request('GET', endpoint)
@@ -135,6 +137,14 @@ class ApiClient:
     @api_key.setter
     def api_key(self, value):
         self.__api_key = value
+
+    @property
+    def installation_id(self):
+        return self.__installation_id
+
+    @installation_id.setter
+    def installation_id(self, value):
+        self.__installation_id = value
 
     @property
     def installation_token(self):

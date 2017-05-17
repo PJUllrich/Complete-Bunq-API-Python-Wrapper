@@ -1,5 +1,4 @@
 import random
-import unittest
 
 from faker import Faker
 
@@ -7,7 +6,7 @@ from apiwrapper.endpoints.device_server import DeviceServer
 from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
-class DeviceServerTest(EndpointTest, unittest.TestCase):
+class DeviceServerTest(EndpointTest):
 
     def setUp(self):
         super().setUp(DeviceServer)
