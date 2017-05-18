@@ -9,7 +9,7 @@ section in the Readme of the GitHub Repository.
 
 Otherwise, lets begin:
 
-First, set you api-key
+First, set your api-key
 
 You can either get it from the Bunq App or (and
 it is recommended to do this if you use the API for the first time), contact
@@ -55,5 +55,5 @@ and my code is not perfect. So please, if you encounter any problems,
 questions, or suggestions for improvements, create an issue on 
 https://github.com/PJUllrich/Complete-Bunq-API-Python-Wrapper
 
-Thank you!
+Thank you and happy coding!
 """

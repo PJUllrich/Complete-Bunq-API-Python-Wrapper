@@ -3,7 +3,7 @@ import configparser
 import os
 
 
-class ConfigController:
+class Controller:
     """A controller class for getting and setting key/value pairs 
     in the config file
     """

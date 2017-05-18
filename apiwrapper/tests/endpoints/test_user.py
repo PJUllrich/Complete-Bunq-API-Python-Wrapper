@@ -3,7 +3,6 @@ from apiwrapper.tests.endpoints.test_endpoint import EndpointTest
 
 
 class UserTest(EndpointTest):
-
     def setUp(self):
         super().setUp(User)
 

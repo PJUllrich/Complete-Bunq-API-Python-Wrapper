@@ -1,7 +1,7 @@
 from apiwrapper.endpoints.endpoint import Endpoint
 
 
-class Tab(Endpoint):
+class TabAttachment(Endpoint):
 
     __endpoint_tab = "tab"
     __endpoint_tab_attachment = "attachment"

@@ -19,16 +19,18 @@ class ApiClient:
     __agent_version = '0.1.0'
     _uri_production = "https://api.bunq.com/v%d" % __version_api
     _uri_sandbox = "https://sandbox.public.api.bunq.com/v%d" % __version_api
+    _use_sandbox = True
 
     __installation_id = None
     __installation_token = None
     __server_token = None
 
-    def __init__(self, privkey, api_key, use_sandbox=True,
+    def __init__(self, privkey, api_key,
                  session_token=None, server_pubkey=None):
         self.__privkey = privkey
         self.__api_key = api_key
-        self._uri = self._uri_sandbox if use_sandbox else self._uri_production
+        self._uri = self._uri_sandbox if self._use_sandbox else \
+            self._uri_production
         self.__session_token = session_token
         self.__server_pubkey = server_pubkey
 

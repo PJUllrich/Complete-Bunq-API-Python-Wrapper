@@ -43,10 +43,10 @@ class EndpointTest(TestCase):
     def side_effect_post(self, endpoint, payload):
         return endpoint, payload
 
-    def assert_parameters(self, should, check):
-        assert (check == should), \
-            self.print_assertion_error(should, check)
+    def assert_parameters(self, should, was):
+        assert (was == should), \
+            "Should be: %s but was: %s" % (should, was)
 
-    @staticmethod
-    def print_assertion_error(should, was):
-        return "Should be: %s but was: %s" % (should, was)
+    @property
+    def _base_endpoint(self):
+        return None
