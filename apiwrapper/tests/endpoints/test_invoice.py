@@ -28,6 +28,13 @@ class InvoiceTest(EndpointTest):
 
         self.assert_parameters(endpoint_should_be, endpoint_to_check)
 
+    def test_get_all_invoices_for_user(self):
+        endpoint_should_be = "/user/%d/invoice" % self.random_id
+
+        endpoint_to_check = self.test_class.get_all_invoices_for_user(self.random_id)
+
+        self.assert_parameters(endpoint_should_be, endpoint_to_check)
+
     def test_get_invoice_by_id(self):
         endpoint_should_be = self._base_endpoint
         endpoint_should_be += "/%d" % self.random_id

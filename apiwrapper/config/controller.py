@@ -10,13 +10,12 @@ class Controller:
 
     __section_default = 'BunqAPI'
     __dir_path = os.path.dirname(os.path.abspath(__file__))
-    __default_filepath = '/%s/parameters.ini' % __dir_path
+    __default_filepath = '%s/parameters.ini' % __dir_path
 
     def __init__(self, filepath=None):
         """Create an instance of a config controller for getting 
         and setting information
         """
-
         self.path = self.__default_filepath if filepath is None else filepath
         self.parser = configparser.ConfigParser()
         if self.__section_default not in self.parser.sections():
@@ -43,7 +42,7 @@ class Controller:
         if section not in self.parser.sections():
             self.parser.add_section(section)
 
-        self.parser.set(section, name, val)
+        self.parser.set(section, name, str(val))
         self.save()
 
     def save(self):
