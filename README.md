@@ -11,12 +11,12 @@ This project is built in **Python 3.6**
 
 ## Getting started
 1. First enter your [API Key](https://www.bunq.com/en/api) in the `apiwrapper/config/parameters.ini` file.
-2. Next, [create a new Virtual Enviroment](https://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) based on **Python 3.6**
+2. Next, [create a new Virtual Environment](https://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) based on **Python 3.6**
 3. Activate your Virtual Environment and install the requirements in `requirements.txt` with `pip3.6 install -r requirements.txt`
-4. Open `setup.py`, read through the comments and follow them. After doing this you will have a ready-to-go installation and can start using the API!
+4. Open `get_started.py`, read through the comments and follow them. After doing this you will have a ready-to-go installation and can start using the API!
 
 ## Reuse Installation
-If you followed the script `setup.py` mentioned above already, you should have the following parameters saved somewhere:
+If you followed the script `get_started.py` mentioned above already, you should have the following parameters saved somewhere:
 
 - API Key
 - Private Key

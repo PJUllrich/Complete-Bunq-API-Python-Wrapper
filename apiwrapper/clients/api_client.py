@@ -168,14 +168,23 @@ class ApiClient:
 
     @property
     def privkey_pem(self):
+        if self.privkey is None:
+            return None
+
         return self.convert_privkey_to_pem(self.privkey)
 
     @property
     def pubkey(self):
+        if self.privkey_pem is None:
+            return None
+
         return self.get_pubkey_from_privkey_pem(self.privkey_pem)
 
     @property
     def server_pubkey_pem(self):
+        if self.server_pubkey is None:
+            return None
+
         return self.convert_pubkey_to_pem(self.server_pubkey)
 
     @staticmethod
