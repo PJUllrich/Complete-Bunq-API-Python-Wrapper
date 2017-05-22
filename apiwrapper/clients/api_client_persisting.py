@@ -11,11 +11,13 @@ class ApiClientPersisting(ApiClient):
     in config/configcontroller.
     """
 
-    def __init__(self, api_key=None):
+    def __init__(self, api_key=None, **kwargs):
         self.config = Controller()
         self.api_key = self.config.get('api_key') if api_key is None else api_key
         self._uri = self._uri_sandbox if self._use_sandbox else \
             self._uri_production
+
+        self._handle_kwargs(kwargs)
 
     @property
     def api_key(self):

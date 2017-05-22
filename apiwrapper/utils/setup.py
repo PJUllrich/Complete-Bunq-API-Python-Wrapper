@@ -104,7 +104,7 @@ class Setup:
 
         r = self.endpoints.installation.create_installation()
         try:
-            res = r['Response']
+            res = r.json()['Response']
 
             id_entry = [x for x in res if list(x)[0] == 'Id'][0]
             token_entry = [x for x in res if list(x)[0] == 'Token'][0]
@@ -143,7 +143,7 @@ class Setup:
             description="New Device")
 
         try:
-            res = r['Response']
+            res = r.json()['Response']
 
             print('New device server was created successfully.')
             return True
@@ -166,7 +166,7 @@ class Setup:
         r = self.endpoints.session_server.create_new_session_server()
 
         try:
-            res = r["Response"]
+            res = r.json()['Response']
 
             res = [x for x in res if list(x)[0] == 'Token'][0]
             session_token = res['Token']['token']
