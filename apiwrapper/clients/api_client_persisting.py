@@ -11,11 +11,11 @@ class ApiClientPersisting(ApiClient):
     in config/configcontroller.
     """
 
-    def __init__(self, api_key=None, use_sandbox=True, **kwargs):
+    def __init__(self, privkey=None, use_sandbox=True, **kwargs):
         self.config = Controller()
-        self.api_key = api_key if api_key is not None else self.config.get('api_key')
+        self.privkey = privkey if privkey is not None else self.config.get('key_private')
 
-        super().__init__(self.api_key, use_sandbox=use_sandbox, **kwargs)
+        super().__init__(self.privkey, use_sandbox=use_sandbox, **kwargs)
 
     @property
     def api_key(self):
@@ -72,5 +72,3 @@ class ApiClientPersisting(ApiClient):
     @session_token.setter
     def session_token(self, value):
         self.config.set('session_token', value)
-
-

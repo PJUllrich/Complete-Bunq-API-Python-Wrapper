@@ -24,11 +24,11 @@ class ApiClient:
     _uri_production = "https://api.bunq.com/v%d" % __version_api
     _uri_sandbox = "https://sandbox.public.api.bunq.com/v%d" % __version_api
 
-    __variables = ['installation_id', 'installation_token', 'privkey',
+    __variables = ['installation_id', 'installation_token', 'api_key',
                    'server_token', 'server_pubkey', 'session_token']
 
-    def __init__(self, api_key, use_sandbox=True, **kwargs):
-        self.api_key = api_key
+    def __init__(self, privkey, use_sandbox=True, **kwargs):
+        self.privkey = privkey
         self._uri = self._uri_sandbox if use_sandbox else self._uri_production
         self._handle_kwargs(kwargs)
 

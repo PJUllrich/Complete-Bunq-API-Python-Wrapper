@@ -34,9 +34,10 @@ class Setup:
 
     def setup_w_existing_private_key(self, private_key, save_to_config=True):
         if save_to_config:
-            self.api_client = ApiClientPersisting(self.api_key, privkey=private_key)
+            self.api_client = ApiClientPersisting(private_key,
+                                                  api_key=self.api_key)
         else:
-            self.api_client = ApiClient(self.api_key, privkey=private_key)
+            self.api_client = ApiClient(private_key, api_key=self.api_key)
 
         self.endpoints = endpoints.Controller(self.api_client)
 

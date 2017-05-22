@@ -9,10 +9,9 @@ from setuptools import setup
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-
 setup(
     name="bunq-api-sdk",
-    version="0.1.0",
+    version="0.1.2",
     author="Peter Ullrich",
     author_email="peter.j.ullrich@gmail.com",
     description=("A SDK for the Bunq API through which all HTTP "
