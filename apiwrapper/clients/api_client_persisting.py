@@ -1,5 +1,5 @@
 from apiwrapper.clients.api_client import ApiClient
-from apiwrapper.config.configcontroller import ConfigController
+from apiwrapper.config.controller import Controller
 
 
 class ApiClientPersisting(ApiClient):
@@ -11,10 +11,11 @@ class ApiClientPersisting(ApiClient):
     in config/configcontroller.
     """
 
-    def __init__(self, api_key=None, use_sandbox=True):
-        self.config = ConfigController()
-        self.api_key = self.config.get('api_key') if api_key is None else api_key
-        self._uri = self._uri_sandbox if use_sandbox else self._uri_production
+    def __init__(self, api_key=None, use_sandbox=True, **kwargs):
+        self.config = Controller()
+        self.api_key = api_key if api_key is not None else self.config.get('api_key')
+
+        super.__init__(self.api_key, use_sandbox, kwargs)
 
     @property
     def api_key(self):

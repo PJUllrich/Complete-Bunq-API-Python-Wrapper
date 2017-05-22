@@ -18,7 +18,7 @@ class AttachmentTab(Endpoint):
 
         return self._make_get_request(endpoint)
 
-    def get_attachment_content(self, user_id, account_id, attachment_id):
+    def get_content(self, user_id, account_id, attachment_id):
         endpoint = self._get_base_endpoint(user_id, account_id, attachment_id)
         endpoint += "/%s" % self.__endpoint_attachment_tab_content
 

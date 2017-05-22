@@ -11,16 +11,17 @@ This project is built in **Python 3.6**
 
 ## Getting started
 1. First enter your [API Key](https://www.bunq.com/en/api) in the `apiwrapper/config/parameters.ini` file.
-2. Next, [create a new Virtual Enviroment](https://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) based on **Python 3.6**
+2. Next, [create a new Virtual Environment](https://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) based on **Python 3.6**
 3. Activate your Virtual Environment and install the requirements in `requirements.txt` with `pip3.6 install -r requirements.txt`
-4. Open `setup.py`, read through the comments and follow them. After doing this you will have a ready-to-go installation and can start using the API!
+4. Open `get_started.py`, read through the comments and follow them. After doing this you will have a ready-to-go installation and can start using the API!
 
 ## Reuse Installation
-If you followed the script `setup.py` mentioned above already, you should have the following parameters saved somewhere:
+If you followed the script `get_started.py` mentioned above already, you should have the following parameters saved somewhere:
 
 - API Key
 - Private Key
 - Installation Token (not needed if you have the Session Token)
+- Installation ID (needed to create new session tokens)
 - Server Public Key
 - Session Token
 
@@ -38,54 +39,63 @@ following lines:
 If you want to use the parameters stored in `apiwrapper/config/parameters.ini`,
 use the following code:
 ```python
-api_client = ApiClient()
+from apiwrapper.clients.api_client_persisting import ApiClientPersisting
+
+api_key = "YOUR API KEY HERE"
+api = ApiClientPersisting(api_key)
 ```
 
 Else, if you want to use your own parameters, use the following
 lines and enter your parameters there
 ```python
+from apiwrapper.clients.api_client import ApiClient
+
+api_key = "YOUR API KEY HERE"
 private_key = "YOUR PRIVATE KEY HERE"
-api_key = "YOUR PRIVATE KEY HERE"
 session_token = "YOUR SESSION TOKEN HERE"
 server_public_key = "THE SERVER PUBLIC KEY HERE"
 
-api_client = ApiClientNonPersisting(private_key, api_key,
-                                    session_token=session_token,
-                                    server_pubkey=server_public_key)
+api = ApiClient(api_key, privkey=private_key,
+                                 session_token=session_token,
+                                 server_pubkey=server_public_key)
 ```
 
 Now, you are able to make calls to the Bunq API using the `EndpointsController`.
 I have included an example of how to get the User ID from the API:
 ```python
-from apiwrapper.endpoints.endpointcontroller import EndpointController
+from apiwrapper.clients.api_client import ApiClient
+from apiwrapper.clients.api_client_persisting import ApiClientPersisting
 import json
 
-api_client = "MAKE SURE TO CREATE THE API CLIENT AS DESCRIBED ABOVE"
-endpoints = EndpointController(api_client)
+api = "MAKE SURE TO CREATE THE API CLIENT AS DESCRIBED ABOVE"
 
-res = endpoints.user.get_all_users()
+res = api.endpoints.user.get_logged_in_user()
 print(json.dumps(res, indent=2))
 ```
 
 ## How to use this API Wrapper
 Each endpoint of the [Bunq API](https://doc.bunq.com/) has its own `Endpoint` module. The existing ones are in the `apiwrapper/endpoints` package.
-The **EndpointController** in `apiwrapper/endpoints/endpointcontroller` has an
+The **EndpointController** in `apiwrapper/endpoints/controller` has an
 instance of each of these endpoints.
-You can call the functions of the `Endpoint` modules through this **EndpointController**
+Any ApiClient will have an instance of this endpoint controller called
+**endpoints**. After creating an ApiClient you can simply make api calls with:
+```python
+api_client.endpoints.ENDPOINT_OF_YOUR_CHOICE.CALL_OF_YOUR_CHOICE()
+```
 
-**Endpoint functions simply return the JSON response from the Bunq API**
+**Endpoint functions simply return the response from the Bunq API.**
 
 #### [Example] Retrieve all Monetary Accounts for User
 ```python
 import json
-from apiwrapper.endpoints.endpointcontroller import EndpointController
 
-api_client = ApiClient()
-endpoints = EndpointController(api_client)
+from apiwrapper.clients.api_client_persisting import ApiClientPersisting
 
 user_id = 1234
 
-res = endpoints.monetary_account.get_all_accounts_for_user(user_id)
+api = ApiClientPersisting()
+res = api.endpoints.monetary_account.get_all_accounts_for_user(user_id)
+
 print(json.dumps(res, indent=2))
 ```
 
@@ -93,3 +103,4 @@ print(json.dumps(res, indent=2))
 If you want to contribute, fork this repository and start implementing one of the following points:
 * Add `POST`, `PUT`, and some `DELETE` calls for all endpoints
 * Add Encryption/Decryption of `/config/parameter.ini` file using Password
+* Have a look at the Issues of this repository

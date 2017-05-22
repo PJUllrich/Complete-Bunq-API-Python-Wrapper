@@ -38,7 +38,7 @@ class ChatConversation(Endpoint):
         return self._make_get_request(endpoint)
 
     # Attachment Logic
-    def get_attachment_by_id(self, user_id, chat_id, attachment_id):
+    def get_chat_attachment_by_id(self, user_id, chat_id, attachment_id):
         endpoint = self._get_base_endpoint(user_id, chat_id)
         endpoint += "/%s/%d" % (
             self.__endpoint_chat_conversation_attachment,
@@ -47,7 +47,7 @@ class ChatConversation(Endpoint):
 
         return self._make_get_request(endpoint)
 
-    def get_attachment_content(self, user_id, chat_id, attachment_id):
+    def get_content_of_chat_attachment(self, user_id, chat_id, attachment_id):
         endpoint = self._get_base_endpoint(user_id, chat_id)
         endpoint += "/%s/%d/%s" % (
             self.__endpoint_chat_conversation_attachment,

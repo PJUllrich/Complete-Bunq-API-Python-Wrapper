@@ -1,25 +1,30 @@
 """
-DISCLAIMER: This code was mostly taken from the example files in: 
+DISCLAIMER: This code was partially taken from the example files in:
 
 https://github.com/madeddie/python-bunq
 
 Thanks for @madeddie for writing these examples and the API Wrapper
 """
 
-from apiwrapper.clients.api_client_persisting import ApiClientPersisting
-from apiwrapper.config.configcontroller import ConfigController
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
-from apiwrapper.endpoints.endpointcontroller import EndpointController
 
+import apiwrapper.config.controller as config
+import apiwrapper.endpoints.controller as endpoints
 from apiwrapper.clients.api_client import ApiClient
+from apiwrapper.clients.api_client_persisting import ApiClientPersisting
 
 
 class Setup:
+
+    """A setup class that registers a connection with the Bunq Api
+
+    :param api_key: A string, the api key of the user
+    """
     def __init__(self, api_key):
         self.api_key = api_key
-        self.config = ConfigController()
+        self.config = config.Controller()
         self.api_client = None
         self.endpoints = None
 
@@ -33,7 +38,7 @@ class Setup:
         else:
             self.api_client = ApiClient(private_key, self.api_key)
 
-        self.endpoints = EndpointController(self.api_client)
+        self.endpoints = endpoints.Controller(self.api_client)
 
         if self.register_key_pair() \
                 and self.create_new_device_server() \
@@ -99,7 +104,7 @@ class Setup:
 
         r = self.endpoints.installation.create_installation()
         try:
-            res = r['Response']
+            res = r.json()['Response']
 
             id_entry = [x for x in res if list(x)[0] == 'Id'][0]
             token_entry = [x for x in res if list(x)[0] == 'Token'][0]
@@ -116,6 +121,7 @@ class Setup:
             self.api_client.server_pubkey = server_public_key
 
             print('Key pair was registered successfully')
+            print('\tInstallation Id: %s' % installation_id)
             print('\tInstallation Token: %s' % installation_token)
             print('\tServer Public Key: %s' % server_public_key)
 
@@ -137,7 +143,7 @@ class Setup:
             description="New Device")
 
         try:
-            res = r['Response']
+            res = r.json()['Response']
 
             print('New device server was created successfully.')
             return True
@@ -160,7 +166,7 @@ class Setup:
         r = self.endpoints.session_server.create_new_session_server()
 
         try:
-            res = r["Response"]
+            res = r.json()['Response']
 
             res = [x for x in res if list(x)[0] == 'Token'][0]
             session_token = res['Token']['token']
