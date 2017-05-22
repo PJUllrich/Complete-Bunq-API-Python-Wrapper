@@ -15,7 +15,7 @@ class ApiClientPersisting(ApiClient):
         self.config = Controller()
         self.api_key = api_key if api_key is not None else self.config.get('api_key')
 
-        super.__init__(self.api_key, use_sandbox, kwargs)
+        super().__init__(self.api_key, use_sandbox=use_sandbox, **kwargs)
 
     @property
     def api_key(self):
@@ -44,6 +44,10 @@ class ApiClientPersisting(ApiClient):
     @property
     def privkey(self):
         return self.config.get('key_private')
+
+    @privkey.setter
+    def privkey(self, value):
+        self.config.set('key_private', value)
 
     @property
     def server_pubkey(self):

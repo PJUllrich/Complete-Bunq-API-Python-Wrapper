@@ -38,10 +38,10 @@ class ApiClient:
         for k in self.__variables:
             setattr(self, k, kwargs.get(k))
 
-    def get(self, endpoint):
+    def get(self, endpoint, verify=True):
         result = self.request('GET', endpoint)
 
-        if self.verify(result):
+        if verify and self.verify(result):
             return result
 
         return None

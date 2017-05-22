@@ -42,6 +42,8 @@ class Controller:
         if section not in self.parser.sections():
             self.parser.add_section(section)
 
+        val = '' if val is None else val
+
         self.parser.set(section, name, str(val))
         self.save()
 
