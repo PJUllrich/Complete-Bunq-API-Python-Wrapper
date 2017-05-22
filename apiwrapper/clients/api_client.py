@@ -36,15 +36,16 @@ class ApiClient:
 
     def _handle_kwargs(self, kwargs):
         for k in self.__variables:
-            setattr(self, k, kwargs.get(k))
+            if getattr(self, k, None) is None:
+                setattr(self, k, kwargs.get(k))
 
     def get(self, endpoint, verify=True):
         result = self.request('GET', endpoint)
 
-        if verify and self.verify(result):
-            return result
+        if verify and not self.verify(result):
+            return None
 
-        return None
+        return result
 
     def post(self, endpoint, payload):
         return self.request('POST', endpoint, payload)

@@ -25,14 +25,18 @@ class Controller:
 
     def get(self, name, section=__section_default):
         """Returns a value with a given name from the configuration file."""
-        try:
+        if self.parser.has_option(section, name):
             return self.parser[section][name]
-        except KeyError:
+        else:
             return None
 
     def set(self, name, val, section=__section_default):
         """Sets an entry in the default section of the config file to a 
         specified value
+
+        If the entry should be set to None, this function will delete it
+        from the config file.
+
         :param section: [Optional] The section in which an entry 
         should be changed
         :param name: The entry whose value should be changed
@@ -42,9 +46,12 @@ class Controller:
         if section not in self.parser.sections():
             self.parser.add_section(section)
 
-        val = '' if val is None else val
+        if val is None:
+            if self.parser.has_option(section, name):
+                self.parser.remove_option(section, name)
+        else:
+            self.parser.set(section, name, str(val))
 
-        self.parser.set(section, name, str(val))
         self.save()
 
     def save(self):
