@@ -25,6 +25,7 @@ class Controller:
 
     def get(self, name, section=__section_default):
         """Returns a value with a given name from the configuration file."""
+        
         if self.parser.has_option(section, name):
             return self.parser[section][name]
         else:
@@ -51,7 +52,7 @@ class Controller:
                 self.parser.remove_option(section, name)
         else:
             self.parser.set(section, name, str(val))
-
+            
         self.save()
 
     def save(self):
