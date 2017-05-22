@@ -23,17 +23,20 @@ class ApiClient:
     __agent_version = '0.1.0'
     _uri_production = "https://api.bunq.com/v%d" % __version_api
     _uri_sandbox = "https://sandbox.public.api.bunq.com/v%d" % __version_api
-    _use_sandbox = True
 
-    def __init__(self, privkey, api_key, **kwargs):
-        self.privkey = privkey
+    __variables = ['installation_id', 'installation_token', 'privkey',
+                   'server_token', 'server_pubkey', 'session_token']
+
+    def __init__(self, api_key, use_sandbox=True, **kwargs):
         self.api_key = api_key
-        self._uri = self._uri_sandbox if self._use_sandbox else \
-            self._uri_production
-
+        self._uri = self._uri_sandbox if use_sandbox else self._uri_production
         self._handle_kwargs(kwargs)
 
         self.__endpoint_controller = EndpointController(self)
+
+    def _handle_kwargs(self, kwargs):
+        for k in self.__variables:
+            setattr(self, k, kwargs.get(k))
 
     def get(self, endpoint):
         result = self.request('GET', endpoint)
@@ -133,12 +136,15 @@ class ApiClient:
         else:
             return True
 
+    def client_is_setup(self):
+        return self.session_token is not None and self.privkey is not None
+
     @property
     def endpoints(self):
         if self.client_is_setup():
             return self.__endpoint_controller
         else:
-            print('ApiClient is not yet properly set up!')
+            print('ApiClient is not yet properly set up! Variables missing!')
             return None
 
     @property
@@ -205,12 +211,3 @@ class ApiClient:
             key_bytes = key_bytes.encode()
 
         return key_bytes
-
-    def client_is_setup(self):
-        return self.session_token is not None
-
-    def _handle_kwargs(self, kwargs):
-        keys = ['installation_id', 'installation_token', 'server_token',
-                'server_pubkey', 'session_token']
-        for k in keys:
-            setattr(self, k, kwargs.get(k))
