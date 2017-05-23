@@ -138,11 +138,7 @@ class ApiClient:
             return True
 
     def request_parameters_are_set(self):
-        return self.privkey is not None \
-               and (
-                   self.session_token is not None
-                   or self.installation_token is not None
-               )
+        return self.privkey is not None
 
     @property
     def endpoints(self):
