@@ -36,7 +36,7 @@ class ApiClient:
 
     def _handle_kwargs(self, kwargs):
         for k in self.__variables:
-            if getattr(self, k, None) is None:
+            if getattr(self, k, None) is None or kwargs.get(k) is not None:
                 setattr(self, k, kwargs.get(k))
 
     def get(self, endpoint, verify=True):
@@ -105,7 +105,7 @@ class ApiClient:
         """
         if not self.server_pubkey:
             print('No server public key defined, skipping verification')
-            return
+            return True
 
         serv_headers = [
             'X-Bunq-Client-Request-Id',
@@ -137,12 +137,16 @@ class ApiClient:
         else:
             return True
 
-    def client_is_setup(self):
-        return self.session_token is not None and self.privkey is not None
+    def request_parameters_are_set(self):
+        return self.privkey is not None \
+               and (
+                   self.session_token is not None
+                   or self.installation_token is not None
+               )
 
     @property
     def endpoints(self):
-        if self.client_is_setup():
+        if self.request_parameters_are_set():
             return self.__endpoint_controller
         else:
             print('ApiClient is not yet properly set up! Variables missing!')
