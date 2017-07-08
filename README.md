@@ -15,6 +15,32 @@ This project is built in **Python 3.6**
 3. Activate your Virtual Environment and install the requirements in `requirements.txt` with `pip3.6 install -r requirements.txt`
 4. Open `get_started.py`, read through the comments and follow them. After doing this you will have a ready-to-go installation and can start using the API!
 
+## How to use this API Wrapper
+Each endpoint of the [Bunq API](https://doc.bunq.com/) has its own `Endpoint` module. The existing ones are in the `apiwrapper/endpoints` package.
+The **EndpointController** in `apiwrapper/endpoints/controller` has an
+instance of each of these endpoints.
+Any ApiClient will have an instance of this endpoint controller called
+**endpoints**. After creating an ApiClient you can simply make api calls with:
+```python
+api_client.endpoints.ENDPOINT_OF_YOUR_CHOICE.CALL_OF_YOUR_CHOICE()
+```
+
+**Endpoint functions simply return the response from the Bunq API.**
+
+#### [Example] Retrieve all Monetary Accounts for User
+```python
+import json
+
+from apiwrapper.clients.api_client_persisting import ApiClientPersisting
+
+user_id = 1234
+
+api = ApiClientPersisting()
+res = api.endpoints.monetary_account.get_all_accounts_for_user(user_id)
+
+print(json.dumps(res, indent=2))
+```
+
 ## Reuse Installation
 If you followed the script `get_started.py` mentioned above already, you should have the following parameters saved somewhere:
 
@@ -70,32 +96,6 @@ import json
 api = "MAKE SURE TO CREATE THE API CLIENT AS DESCRIBED ABOVE"
 
 res = api.endpoints.user.get_logged_in_user()
-print(json.dumps(res, indent=2))
-```
-
-## How to use this API Wrapper
-Each endpoint of the [Bunq API](https://doc.bunq.com/) has its own `Endpoint` module. The existing ones are in the `apiwrapper/endpoints` package.
-The **EndpointController** in `apiwrapper/endpoints/controller` has an
-instance of each of these endpoints.
-Any ApiClient will have an instance of this endpoint controller called
-**endpoints**. After creating an ApiClient you can simply make api calls with:
-```python
-api_client.endpoints.ENDPOINT_OF_YOUR_CHOICE.CALL_OF_YOUR_CHOICE()
-```
-
-**Endpoint functions simply return the response from the Bunq API.**
-
-#### [Example] Retrieve all Monetary Accounts for User
-```python
-import json
-
-from apiwrapper.clients.api_client_persisting import ApiClientPersisting
-
-user_id = 1234
-
-api = ApiClientPersisting()
-res = api.endpoints.monetary_account.get_all_accounts_for_user(user_id)
-
 print(json.dumps(res, indent=2))
 ```
 
