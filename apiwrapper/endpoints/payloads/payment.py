@@ -8,7 +8,7 @@ class Payment:
         :param attachment: Optional, Array of Attachment IDs
         """
         self.amount = {
-            'value': amount,
+            'value': str(amount),
             'currency': 'EUR'
         }
         self.counterparty_alias = counterparty_alias.__dict__
