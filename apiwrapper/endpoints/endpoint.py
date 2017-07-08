@@ -11,5 +11,5 @@ class Endpoint:
     def _make_get_request(self, endpoint, verify=True):
         return self._api_client.get(endpoint, verify)
 
-    def _make_post_request(self, endpoint, payload):
-        return self._api_client.post(endpoint, payload)
+    def _make_post_request(self, endpoint, payload, **kwargs):
+        return self._api_client.post(endpoint, payload, **kwargs)

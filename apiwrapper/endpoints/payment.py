@@ -14,11 +14,11 @@ class Payment(Endpoint):
         return MonetaryAccount._get_base_endpoint(user_id, account_id)
 
     # Payment Logic
-    def get_all_payments_for_account(self, user_id, account_id):
+    def get_all_payments_for_account(self, user_id, account_id, **kwargs):
         endpoint = self._get_base_endpoint(user_id, account_id)
         endpoint += "/%s" % self.__endpoint_payment
 
-        return self._make_get_request(endpoint)
+        return self._make_get_request(endpoint, kwargs)
 
     def get_payment_by_id(self, user_id, account_id, payment_id):
         endpoint = self._get_base_endpoint(user_id, account_id)
@@ -35,6 +35,12 @@ class Payment(Endpoint):
         )
 
         return self._make_get_request(endpoint)
+
+    def make_payment(self, user_id, account_id, payment_obj):
+        endpoint = self._get_base_endpoint(user_id, account_id)
+        endpoint += "/%s" % self.__endpoint_payment
+
+        return self._make_post_request(endpoint, payment_obj.__dict__)
 
     # Payment Batch Logic
     def get_all_payments_batches_for_account(self, user_id, account_id):
