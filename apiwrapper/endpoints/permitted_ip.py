@@ -23,3 +23,8 @@ class PermittedIp(Endpoint):
         endpoint = self._get_base_endpoint(user_id, credential_id, ip_id)
 
         return self._make_get_request(endpoint)
+
+    def set_ip_status(self, user_id, credential_id, ip_obj):
+        endpoint = self._get_base_endpoint(user_id, credential_id)
+
+        return self._make_post_request(endpoint, ip_obj.__dict__)

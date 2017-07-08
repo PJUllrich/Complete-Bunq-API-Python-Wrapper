@@ -19,8 +19,6 @@ class Payment:
 
         :param attachment_ids: Array of Integers, the IDs of the attachments
         """
-        self.attachment = []
-        for id in attachment_ids:
-            self.attachment.append({'id': id})
+        self.attachment = [{'id': id for id in attachment_ids}]
 
-    # TODO: Check that description is not more than 140 characters
+        # TODO: Check that description is not more than 140 characters

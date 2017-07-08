@@ -38,6 +38,12 @@ class RequestInquiry(Endpoint):
 
         return self._make_get_request(endpoint)
 
+    def create_request_inquiry(self, user_id, account_id, request_inquiry_obj):
+        endpoint = self._get_base_endpoint(user_id, account_id)
+        endpoint += "/%s" % self.__endpoint_request_inquiry
+
+        return self._make_post_request(endpoint, request_inquiry_obj.__dict__)
+
     # Request Inquiry Batch Logic
     def get_all_batch_inquiries_for_account(self, user_id, account_id):
         endpoint = self._get_base_endpoint(user_id, account_id)
@@ -51,6 +57,12 @@ class RequestInquiry(Endpoint):
             self.__endpoint_request_inquiry_batch, inquiry_id)
 
         return self._make_get_request(endpoint)
+
+    def make_payment_batch(self, user_id, account_id, request_inquiry_batch_obj):
+        endpoint = self._get_base_endpoint(user_id, account_id)
+        endpoint += "/%s" % self.__endpoint_request_inquiry_batch
+
+        return self._make_post_request(endpoint, request_inquiry_batch_obj.__dict__)
 
     # Request Response Logic
     def get_all_request_responses_for_account(self, user_id, account_id):

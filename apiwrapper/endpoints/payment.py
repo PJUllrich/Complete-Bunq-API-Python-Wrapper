@@ -54,3 +54,11 @@ class Payment(Endpoint):
         endpoint += "/%s/%d" % (self.__endpoint_payment_batch, batch_id)
 
         return self._make_get_request(endpoint)
+
+    def make_payment_batch(self, user_id, account_id, payment_batch_obj):
+        endpoint = self._get_base_endpoint(user_id, account_id)
+        endpoint += "/%s" % self.__endpoint_payment_batch
+
+        return self._make_post_request(endpoint, payment_batch_obj.__dict__)
+
+
